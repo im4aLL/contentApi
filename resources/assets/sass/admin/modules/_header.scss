@@ -1,0 +1,19 @@
+.header {
+    border-top: 5px solid $base-black;
+    border-bottom: 1px solid lighten($base-black, 70%);
+    margin-bottom: 20px;
+}
+
+.header-quick-menu {
+    margin: 15px 0;
+}
+
+.header-logo {
+    color: $base-black;
+    text-decoration: none;
+
+    &:hover {
+        color: $base-black;
+        text-decoration: none;
+    }
+}

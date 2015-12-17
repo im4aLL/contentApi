@@ -1,0 +1,16 @@
+.btn-native {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.btn-black {
+    background: $base-black;
+    border: 1px solid $base-black;
+    color: $base-white;
+
+    &:hover {
+        background: #000000;
+        border: 1px solid $base-black;
+        color: $base-white;
+    }
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminMenuController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/breadcrumbs.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/routes.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Providers/DashboardServiceProvider.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/config/app.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/migrations/2015_12_17_171950_create_menu_table.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/migrations/2015_12_17_172751_create_page_table.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/migrations/2015_12_17_173454_create_language_table.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/migrations/2015_12_17_174336_create_content_table.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/migrations/2015_12_17_174851_create_attachment_table.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/migrations/2015_12_17_180943_create_content_table.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gulpfile.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/package.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/assets/js/admin/admin.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/assets/js/app.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/assets/sass/admin/_base.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/assets/sass/admin/_settings.scss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/assets/sass/admin/admin.scss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/assets/sass/admin/modules/_btn.scss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/assets/sass/admin/modules/_form.scss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/assets/sass/admin/modules/_header.scss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/assets/sass/admin/modules/_login.scss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/admin/index.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/admin/menu/index.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/admin/shared/breadcrumb.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/admin/shared/header.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/admin/shared/left.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/auth/login.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/master.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vendor/composer/autoload_classmap.php" charset="UTF-8" />
+  </component>
+</project>
