@@ -1,0 +1,15 @@
+.block {
+
+}
+
+.block-header,
+.block-footer {
+    background: lighten($base-black, 72%);
+    padding: 15px;
+    margin: 1px 0;
+}
+
+.block-body {
+    background: lighten($base-black, 78%);
+    padding: 15px;
+}

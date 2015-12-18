@@ -17,8 +17,8 @@ class CreateAttachmentTable extends Migration
             $table->string('name');
             $table->string('location');
             $table->string('type');
-            $table->integer('user_id');
-            $table->boolean('published');
+            $table->integer('user_id')->unsigned();
+            $table->boolean('state')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <a href="{{ route('admin::root') }}" class="header-logo"><h3>Dashboard <small>v1.0.0</small></h3></a>
+                <a href="{{ route('admin.root') }}" class="header-logo"><h3>Dashboard <small>v1.0.0</small></h3></a>
             </div>
             <div class="col-sm-6">
 

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\MenuFromRequest;
+use App\Http\Requests\Admin\UpdateStateRequest;
+use App\Models\Admin\Menu;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +19,8 @@ class AdminMenuController extends Controller
      */
     public function index()
     {
-        return view('admin.menu.index');
+        $menus = Menu::all();
+        return view('admin.menu.index', compact('menus'));
     }
 
     /**
@@ -26,18 +30,28 @@ class AdminMenuController extends Controller
      */
     public function create()
     {
-        //
+        $data = [];
+        // $data['menus'] = Menu::select('id', 'name')->lists('name', 'id')->toArray();
+        $data['menus'] = Menu::findAllWithParent();
+
+        return view('admin.menu.form', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  MenuFromRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MenuFromRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = strlen($data['slug']) == 0 ? str_slug($data['name']) : $data['slug'];
+        $data['user_id'] = auth()->user()->id;
+
+        $menu = Menu::create($data);
+
+        return redirect()->route('admin.menu')->with('alert-success', $menu->name.' menu has been created!');
     }
 
     /**
@@ -59,29 +73,67 @@ class AdminMenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [];
+        $data['menu'] = Menu::findOrFail($id);
+        $data['menus'] = Menu::findAllWithParent();
+        return view('admin.menu.form', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  MenuFromRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MenuFromRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = strlen($data['slug']) == 0 ? str_slug($data['name']) : $data['slug'];
+
+        $menu = Menu::findOrFail($id);
+        $menu->update($data);
+
+        return redirect()->route('admin.menu')->with('alert-success', $menu->name.' menu has been updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param UpdateStateRequest $request
+     * @return \Illuminate\Http\Response
+     * @internal param int $id
+     */
+    public function destroy(UpdateStateRequest $request)
+    {
+        $items = $request->input('items');
+        $request->session()->flash('alert-success', 'Selected menus has been deleted!');
+        return Menu::destroy($items);
+    }
+
+    /**
+     * Publish items
+     *
+     * @param  UpdateStateRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function publish(UpdateStateRequest $request)
     {
-        //
+        $items = $request->input('items');
+        $request->session()->flash('alert-success', 'Selected menus has been published!');
+        return Menu::whereIn('id', $items)->update(['state' => 1]);
+    }
+
+    /**
+     * Unpublish items
+     *
+     * @param  UpdateStateRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function unpublish(UpdateStateRequest $request)
+    {
+        $items = $request->input('items');
+        $request->session()->flash('alert-success', 'Selected menus has been unpublished!');
+        return Menu::whereIn('id', $items)->update(['state' => 0]);
     }
 }

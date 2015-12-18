@@ -5853,3 +5853,24 @@ a, button {
   .header-logo:hover {
     color: #333333;
     text-decoration: none; }
+
+.table-bar {
+  background: #ebf2fb;
+  padding: 10px;
+  margin-bottom: 20px; }
+
+.table-bar-secondary {
+  background: #ebebeb; }
+
+.hl-primary {
+  padding: 10px 0 20px; }
+
+.block-header,
+.block-footer {
+  background: #ebebeb;
+  padding: 15px;
+  margin: 1px 0; }
+
+.block-body {
+  background: #fafafa;
+  padding: 15px; }

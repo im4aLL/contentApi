@@ -15,11 +15,23 @@ Route::get('/', ['as' => 'home', function() {
     return redirect('dashboard');
 }]);
 
+//Route::resource('photo', 'Admin\AdminController');
+
 
 // admin routes
-Route::group(['as' => 'admin::', 'middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'dashboard'], function () {
+Route::group(['as' => 'admin.', 'middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'dashboard'], function () {
     Route::get('/', ['as' => 'root', 'uses' => 'AdminController@index']);
-    Route::get('/menus', ['as' => 'menus', 'uses' => 'AdminMenuController@index']);
+
+    // menu
+    Route::get('/menus', ['as' => 'menu', 'uses' => 'AdminMenuController@index']);
+    Route::get('/menus/create', ['as' => 'menu.create', 'uses' => 'AdminMenuController@create']);
+    Route::post('/menus/create', ['as' => 'menu.store', 'uses' => 'AdminMenuController@store']);
+    Route::get('/menus/{menu}/edit', ['as' => 'menu.edit', 'uses' => 'AdminMenuController@edit']);
+    Route::put('/menus/{menu}/edit', ['as' => 'menu.update', 'uses' => 'AdminMenuController@update']);
+
+    Route::put('/menus/publish', ['as' => 'menu.publish', 'uses' => 'AdminMenuController@publish']);
+    Route::put('/menus/unpublish', ['as' => 'menu.unpublish', 'uses' => 'AdminMenuController@unpublish']);
+    Route::delete('/menus/delete', ['as' => 'menu.delete', 'uses' => 'AdminMenuController@destroy']);
 });
 
 // Authentication routes
