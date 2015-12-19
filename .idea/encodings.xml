@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminCategoryController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminMenuController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Requests/Admin/CatFormRequest.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Requests/Admin/MenuFromRequest.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Requests/Admin/UpdateStateRequest.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/breadcrumbs.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/routes.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Models/Admin/Cat.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Models/Admin/Menu.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Providers/Admin/ViewServiceProvider.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/config/app.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/database/migrations/2015_12_16_053818_create_cat_table.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/database/migrations/2015_12_17_174851_create_attachment_table.php" charset="UTF-8" />
@@ -29,6 +33,8 @@
     <file url="file://$PROJECT_DIR$/resources/assets/sass/admin/modules/_login.scss" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/assets/sass/admin/modules/_misc.scss" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/assets/sass/admin/modules/_table.scss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/admin/category/form.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/admin/category/index.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/admin/index.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/admin/menu/form.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/admin/menu/index.blade.php" charset="UTF-8" />

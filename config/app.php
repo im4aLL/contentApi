@@ -138,6 +138,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
+        App\Providers\Admin\ViewServiceProvider::class,
 
         /*
          * Application Service Providers...
