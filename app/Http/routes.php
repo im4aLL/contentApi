@@ -42,6 +42,16 @@ Route::group(['as' => 'admin.', 'middleware' => 'auth', 'namespace' => 'Admin', 
     Route::put('/categories/unpublish', ['as' => 'cat.unpublish', 'uses' => 'AdminCategoryController@unpublish']);
     Route::delete('/categories/delete', ['as' => 'cat.delete', 'uses' => 'AdminCategoryController@destroy']);
 
+    // categories
+    Route::get('/contents', ['as' => 'content', 'uses' => 'AdminContentController@index']);
+    Route::get('/contents/create', ['as' => 'content.create', 'uses' => 'AdminContentController@create']);
+    Route::post('/contents/create', ['as' => 'content.store', 'uses' => 'AdminContentController@store']);
+    Route::get('/contents/{content}/edit', ['as' => 'content.edit', 'uses' => 'AdminContentController@edit']);
+    Route::put('/contents/{content}/edit', ['as' => 'content.update', 'uses' => 'AdminContentController@update']);
+    Route::put('/contents/publish', ['as' => 'content.publish', 'uses' => 'AdminContentController@publish']);
+    Route::put('/contents/unpublish', ['as' => 'content.unpublish', 'uses' => 'AdminContentController@unpublish']);
+    Route::delete('/contents/delete', ['as' => 'content.delete', 'uses' => 'AdminContentController@destroy']);
+
 });
 
 // Authentication routes

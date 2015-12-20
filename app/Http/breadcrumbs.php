@@ -43,3 +43,22 @@ Breadcrumbs::register('admin.cat.edit', function($breadcrumbs)
     $breadcrumbs->parent('admin.cat');
     $breadcrumbs->push('Edit category', route('admin.cat.edit'));
 });
+
+// admin content
+Breadcrumbs::register('admin.content', function($breadcrumbs)
+{
+    $breadcrumbs->parent('admin.root');
+    $breadcrumbs->push('Contents', route('admin.content'));
+});
+
+Breadcrumbs::register('admin.content.create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('admin.content');
+    $breadcrumbs->push('Add new content', route('admin.content.create'));
+});
+
+Breadcrumbs::register('admin.content.edit', function($breadcrumbs)
+{
+    $breadcrumbs->parent('admin.content');
+    $breadcrumbs->push('Edit content', route('admin.content.edit'));
+});

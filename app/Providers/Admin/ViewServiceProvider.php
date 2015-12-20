@@ -3,6 +3,7 @@
 namespace App\Providers\Admin;
 
 use App\Models\Admin\Cat;
+use App\Models\Admin\Content;
 use App\Models\Admin\Menu;
 use Illuminate\Support\ServiceProvider;
 
@@ -37,6 +38,7 @@ class ViewServiceProvider extends ServiceProvider
             $total = new \stdClass();
             $total->menu = Menu::count();
             $total->category = Cat::count();
+            $total->content = Content::count();
 
             $view->with('total', $total);
         });

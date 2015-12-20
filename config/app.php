@@ -139,6 +139,7 @@ return [
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
         App\Providers\Admin\ViewServiceProvider::class,
+        Mews\Purifier\PurifierServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -199,6 +200,7 @@ return [
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Form'		=> 	Illuminate\Html\FormFacade::class,
         'HTML'		=> 	Illuminate\Html\HtmlFacade::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
 
     ],
 
