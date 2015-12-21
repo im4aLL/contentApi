@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\ContentFormRequest;
 use App\Models\Admin\Cat;
 use App\Models\Admin\Content;
 use Illuminate\Http\Request;
@@ -30,18 +31,19 @@ class AdminContentController extends Controller
     public function create()
     {
         $categories = Cat::select('id', 'name')->lists('name', 'id')->toArray();
-        return view('admin.content.form', compact('categories'));
+        $additional_fields = session('admin_content_settings');
+        return view('admin.content.form', compact('categories', 'additional_fields'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ContentFormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContentFormRequest $request)
     {
-        //
+        return $request->all();
     }
 
     /**
@@ -87,5 +89,30 @@ class AdminContentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function settings(Request $request)
+    {
+        $request->session()->forget('admin_content_settings');
+
+        $settings = [];
+        if( $request->input('additional_fields') == 'remove' )
+        {
+
+        }
+        else {
+            for($i = 0; $i < count($request->input('field_type')); $i++ ) {
+                $type = $request->input('field_type')[$i];
+                $qty = $request->input('quantity')[$i];
+
+                if($type != NULL && $qty > 0) {
+                    $settings['field_type'][] = $request->input('field_type')[$i];
+                    $settings['quantity'][] = $request->input('quantity')[$i];
+                }
+            }
+        }
+
+        $request->session()->put('admin_content_settings', $settings);
+        return redirect()->back()->with('alert-success', 'Additional fields updated!');
     }
 }

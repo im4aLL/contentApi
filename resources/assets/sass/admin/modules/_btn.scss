@@ -8,7 +8,8 @@
     border: 1px solid $base-black;
     color: $base-white;
 
-    &:hover {
+    &:hover,
+    &:focus {
         background: #000000;
         border: 1px solid $base-black;
         color: $base-white;

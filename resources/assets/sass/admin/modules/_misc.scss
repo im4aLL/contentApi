@@ -1,3 +1,11 @@
 .hl-primary {
     padding: 10px 0 20px;
 }
+
+.settings-form-master-field {
+    margin-bottom: 10px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}

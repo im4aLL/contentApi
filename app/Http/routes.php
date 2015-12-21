@@ -52,6 +52,8 @@ Route::group(['as' => 'admin.', 'middleware' => 'auth', 'namespace' => 'Admin', 
     Route::put('/contents/unpublish', ['as' => 'content.unpublish', 'uses' => 'AdminContentController@unpublish']);
     Route::delete('/contents/delete', ['as' => 'content.delete', 'uses' => 'AdminContentController@destroy']);
 
+    Route::post('/contents/settings', ['as' => 'content.settings', 'uses' => 'AdminContentController@settings']);
+
 });
 
 // Authentication routes
