@@ -12,7 +12,9 @@ Utilities.prototype.loadRiceTextEditor = function () {
     //var _this = this;
 
     if( $('.editor').length > 0 ) {
-        $('.editor').easyEditor();
+        $('.editor').easyEditor({
+            buttons: ['bold', 'italic', 'link', 'h2', 'h3', 'h4', 'alignleft', 'aligncenter', 'alignright', 'quote', 'code', 'list', 'x']
+        });
     }
 };
 

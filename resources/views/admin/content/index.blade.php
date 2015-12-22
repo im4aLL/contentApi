@@ -28,8 +28,8 @@
                 @foreach($contents as $content)
                     <tr{!! $content->state == 0 ? ' class="warning"' : '' !!}>
                         <td><input type="checkbox" name="select[]" value="{{ $content->id }}"></td>
-                        <td><a href="{{ route('admin.cat.edit', ['content' => $content->id]) }}">{{ $content->title }}</a></td>
-                        <td>{{ $content->cat_id }}</td>
+                        <td><a href="{{ route('admin.content.edit', ['content' => $content->id]) }}">{{ $content->title }}</a></td>
+                        <td>{{ $content->category->name }}</td>
                         <td>{{ $content->key }}</td>
                         <td class="text-center">
                             @if ($content->updated_at == $content->created_at)

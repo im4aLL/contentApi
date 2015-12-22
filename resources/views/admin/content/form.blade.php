@@ -5,7 +5,7 @@
 
 
 
-    @if( isset($category) )
+    @if( isset($content) )
         <h2 class="hl-primary">Edit content <small><a href="" data-toggle="modal" data-target="#settings">Additional fields</a></small></h2>
     @else
         <h2 class="hl-primary">Create content <small><a href="" data-toggle="modal" data-target="#settings">Additional fields</a></small></h2>
@@ -74,8 +74,8 @@
 
     <div class="clearfix"></div>
 
-    @if( isset($contents) )
-        {!! Form::model($contents, ['route' => ['admin.content.update', $content->id], 'method' => 'PUT', 'class' => 'form']) !!}
+    @if( isset($content) )
+        {!! Form::model($content, ['route' => ['admin.content.update', $content->id], 'method' => 'PUT', 'class' => 'form']) !!}
     @else
         {!! Form::open(['url' => route('admin.content.store'), 'class' => 'form']) !!}
     @endif
@@ -100,7 +100,7 @@
 
                     <div class="form-group">
                         {!! Form::label('cat_id', 'Category') !!}
-                        {!! Form::select('cat_id', array_merge([0 => 'Uncategorized'], $categories), old('cat_id'), ['class' => 'form-control']) !!}
+                        {!! Form::select('cat_id', $categories, old('cat_id'), ['class' => 'form-control']) !!}
                         <span class="help-block"><small>Every content should be in a category else select uncategorized</small></span>
                     </div>
 
@@ -116,10 +116,11 @@
                         <span class="help-block"><small>Page sub headline</small></span>
                     </div>
 
+                    <?php $temp = '0'; ?>
                     <div class="form-group">
                         {!! Form::label('content', 'Contents') !!}
-                        {!! Form::text('content[key][0]', 'one', ['class' => 'form-control form-control-single', 'placeholder' => 'Content key']) !!}
-                        {!! Form::textarea('content[html][0]', null, ['class' => 'form-control editor', 'placeholder' => 'Type here ...', 'rows' => 15]) !!}
+                        {!! Form::text('content[key]['.$temp.']', old('content[key]['.$temp.']'), ['class' => 'form-control form-control-single', 'placeholder' => 'Content key']) !!}
+                        {!! Form::textarea('content[html]['.$temp.']', old('content[html]['.$temp.']'), ['class' => 'form-control editor', 'placeholder' => 'Type here ...', 'rows' => 15]) !!}
                         <span class="help-block"><small>Your page content usually long description</small></span>
                     </div>
 
@@ -129,13 +130,14 @@
                             <label>Additional fields</label>
                             @for($i = 0; $i < count($additional_fields['field_type']); $i++)
                                 @for($j = 0; $j < $additional_fields['quantity'][$i]; $j++)
-                                    {!! Form::text('content[key][]', null, ['class' => 'form-control form-control-single', 'placeholder' => 'Content key']) !!}
+                                    <?php $temp = $i.'_'.$j; ?>
+                                    {!! Form::text('content[key]['.$temp.']', old('content[key]['.$temp.']'), ['class' => 'form-control form-control-single', 'placeholder' => 'Content key']) !!}
                                     @if($additional_fields['field_type'][$i] == 'text')
-                                        {!! Form::text('content[html][]', null, ['class' => 'form-control form-control-single', 'placeholder' => 'Content details']) !!}
+                                        {!! Form::text('content[html]['.$temp.']', old('content[html]['.$temp.']'), ['class' => 'form-control form-control-single', 'placeholder' => 'Content details']) !!}
                                     @elseif($additional_fields['field_type'][$i] == 'plaintextarea')
-                                        {!! Form::textarea('content[html][]', null, ['class' => 'form-control form-control-single', 'placeholder' => 'Type here ...', 'rows' => 10]) !!}
+                                        {!! Form::textarea('content[html]['.$temp.']', old('content[html]['.$temp.']'), ['class' => 'form-control form-control-single', 'placeholder' => 'Type here ...', 'rows' => 10]) !!}
                                     @elseif($additional_fields['field_type'][$i] == 'richtexteditor')
-                                        {!! Form::textarea('content[html][]', null, ['class' => 'form-control editor form-control-single', 'placeholder' => 'Type here ...', 'rows' => 15]) !!}
+                                        {!! Form::textarea('content[html]['.$temp.']', old('content[html]['.$temp.']'), ['class' => 'form-control editor form-control-single', 'placeholder' => 'Type here ...', 'rows' => 15]) !!}
                                     @endif
                                     <hr>
                                 @endfor
@@ -152,7 +154,7 @@
             </div>
         </div>
         <div class="block-footer">
-            @if( isset($contents) )
+            @if( isset($content) )
                 <button type="submit" class="btn btn-black">Save and update content</button>
             @else
                 <button type="submit" class="btn btn-primary">Save and create content</button>

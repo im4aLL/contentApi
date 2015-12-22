@@ -13,6 +13,7 @@
     <file url="file://$PROJECT_DIR$/app/Http/breadcrumbs.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/routes.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Models/Admin/Cat.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Models/Admin/Content.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Models/Admin/Menu.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Providers/Admin/ViewServiceProvider.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/config/app.php" charset="UTF-8" />
@@ -20,6 +21,7 @@
     <file url="file://$PROJECT_DIR$/database/migrations/2015_12_17_174851_create_attachment_table.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/database/migrations/2015_12_17_180943_create_content_table.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/database/migrations/2015_12_18_051642_create_menu_table.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/migrations/2015_12_22_143517_add_content_types_to_content_table.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gulpfile.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/package.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/readme.md" charset="UTF-8" />
