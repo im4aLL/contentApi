@@ -14,10 +14,15 @@ use App\Http\Controllers\Controller;
 class AdminContentController extends Controller
 {
     private $additional_fields;
+    private $remove_additional_field_flag;
 
+    /**
+     * Contructor function
+     */
     public function __construct()
     {
         $this->additional_fields = session('admin_content_settings');
+        $this->remove_additional_field_flag = session('admin_content_settings_remove') ? session('admin_content_settings_remove') : false;
     }
 
     /**
@@ -27,7 +32,9 @@ class AdminContentController extends Controller
      */
     public function index()
     {
-        $contents = Content::with('category')->get();
+        $this->destroyAllSettings();
+
+        $contents = Content::with('category')->orderBy('id', 'DESC')->get();
         return view('admin.content.index', compact('contents'));
     }
 
@@ -58,21 +65,8 @@ class AdminContentController extends Controller
         $data['subtitle'] = $request->input('subtitle');
         $data['user_id'] = auth()->user()->id;
         $data['state'] = $request->input('state');
-
-        $data['content'] = [];
-
-        $content_array = array_map('array_values', $request->input('content'));
-        for($i = 0; $i < count($content_array['html']); $i++)
-        {
-            if(trim($content_array['html'][$i]) != NULL) {
-                $key = trim($content_array['key'][$i]) != NULL ? $content_array['key'][$i] : $i;
-                $data['content'][snake_case($key)] = $content_array['html'][$i];
-            }
-        }
-        $data['content'] = collect($data['content'])->toJson();
+        $data['content'] = Content::formatContentToJson($request->input('content'));
         $data['content_types'] = is_array($this->additional_fields) && count($this->additional_fields) > 0 ? json_encode($this->additional_fields) : '';
-
-        return $request->all();
 
         $content = Content::create($data);
         $request->session()->forget('admin_content_settings');
@@ -94,47 +88,55 @@ class AdminContentController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, Request $request)
+    public function edit($id)
     {
 
         $categories = Cat::select('id', 'name')->lists('name', 'id')->toArray();
         $content = Content::findOrFail($id);
-        $additional_fields = (array) json_decode($content->content_types);
 
-
-        $content['content'] = [];
-        print_r($content->content);
-        $counter = 0;
-        foreach($content->content as $c) {
-            if($counter == 0) {
-                $content['content'][0] = $c;
-            }
-            else {
-                $content['content'][0] = $c;
-            }
-
-            $counter++;
+        if($this->remove_additional_field_flag == false) {
+            $additional_fields = (array) json_decode($content->content_types);
         }
-        return $content;
+        $contents = Content::buildContentArray($content);
 
-        return view('admin.content.form', compact('categories', 'additional_fields', 'content'));
+        return view('admin.content.form', compact('categories', 'additional_fields', 'content', 'contents'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ContentFormRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ContentFormRequest $request, $id)
     {
-        //
+        $content = Content::findOrFail($id);
+
+        $data = [];
+        $data['key'] = $request->input('key');
+        $data['cat_id'] = $request->input('cat_id');
+        $data['title'] = $request->input('title');
+        $data['subtitle'] = $request->input('subtitle');
+        $data['state'] = $request->input('state');
+        $data['content'] = Content::formatContentToJson($request->input('content'));
+        $data['content_types'] = is_array($this->additional_fields) && count($this->additional_fields) > 0 ? json_encode($this->additional_fields) : $content->content_types;
+
+        $content->update($data);
+        $this->destroyAllSettings();
+
+        return redirect()->route('admin.content')->with('alert-success', $content->title.' content has been updated!');
     }
 
+
+    /**
+     * Add or update additional field data into from
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function settings(Request $request)
     {
         $request->session()->forget('admin_content_settings');
@@ -142,7 +144,7 @@ class AdminContentController extends Controller
         $settings = [];
         if( $request->input('additional_fields') == 'remove' )
         {
-
+            $request->session()->put('admin_content_settings_remove', true);
         }
         else {
             for($i = 0; $i < count($request->input('field_type')); $i++ ) {
@@ -157,7 +159,16 @@ class AdminContentController extends Controller
         }
 
         $request->session()->put('admin_content_settings', $settings);
-        return redirect()->back()->with('alert-success', 'Additional fields updated!');
+        return redirect()->back()->with('alert-info', 'Additional fields updated! (temporary) P.S. Until you hit save, data will not be saved!');
+    }
+
+    /**
+     * Destroy all additional field settings
+     */
+    public function destroyAllSettings()
+    {
+        session()->forget('admin_content_settings_remove');
+        session()->forget('admin_content_settings');
     }
 
     /**

@@ -15,14 +15,15 @@
                 <th>Title</th>
                 <th>Category</th>
                 <th>Key</th>
-                <th class="text-center">Last modified at</th>
+                <th>Created at</th>
+                <th>Last modified at</th>
                 <th class="text-center">Published?</th>
             </tr>
             </thead>
             <tbody>
             @if( count($contents) == 0 )
                 <tr>
-                    <td colspan="6">No record found!</td>
+                    <td colspan="7">No record found!</td>
                 </tr>
             @else
                 @foreach($contents as $content)
@@ -31,7 +32,8 @@
                         <td><a href="{{ route('admin.content.edit', ['content' => $content->id]) }}">{{ $content->title }}</a></td>
                         <td>{{ $content->category->name }}</td>
                         <td>{{ $content->key }}</td>
-                        <td class="text-center">
+                        <td>{{ $content->created_at->diffForHumans() }}</td>
+                        <td>
                             @if ($content->updated_at == $content->created_at)
                                 Never
                             @else

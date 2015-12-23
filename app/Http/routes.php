@@ -15,8 +15,6 @@ Route::get('/', ['as' => 'home', function() {
     return redirect('dashboard');
 }]);
 
-//Route::resource('photo', 'Admin\AdminController');
-
 
 // admin routes
 Route::group(['as' => 'admin.', 'middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'dashboard'], function () {
@@ -42,7 +40,7 @@ Route::group(['as' => 'admin.', 'middleware' => 'auth', 'namespace' => 'Admin', 
     Route::put('/categories/unpublish', ['as' => 'cat.unpublish', 'uses' => 'AdminCategoryController@unpublish']);
     Route::delete('/categories/delete', ['as' => 'cat.delete', 'uses' => 'AdminCategoryController@destroy']);
 
-    // categories
+    // contents
     Route::get('/contents', ['as' => 'content', 'uses' => 'AdminContentController@index']);
     Route::get('/contents/create', ['as' => 'content.create', 'uses' => 'AdminContentController@create']);
     Route::post('/contents/create', ['as' => 'content.store', 'uses' => 'AdminContentController@store']);
@@ -51,8 +49,17 @@ Route::group(['as' => 'admin.', 'middleware' => 'auth', 'namespace' => 'Admin', 
     Route::put('/contents/publish', ['as' => 'content.publish', 'uses' => 'AdminContentController@publish']);
     Route::put('/contents/unpublish', ['as' => 'content.unpublish', 'uses' => 'AdminContentController@unpublish']);
     Route::delete('/contents/delete', ['as' => 'content.delete', 'uses' => 'AdminContentController@destroy']);
-
     Route::post('/contents/settings', ['as' => 'content.settings', 'uses' => 'AdminContentController@settings']);
+
+    // pages
+    Route::get('/pages', ['as' => 'page', 'uses' => 'AdminPageController@index']);
+    Route::get('/pages/create', ['as' => 'page.create', 'uses' => 'AdminPageController@create']);
+    Route::post('/pages/create', ['as' => 'page.store', 'uses' => 'AdminPageController@store']);
+    Route::get('/pages/{page}/edit', ['as' => 'page.edit', 'uses' => 'AdminPageController@edit']);
+    Route::put('/pages/{page}/edit', ['as' => 'page.update', 'uses' => 'AdminPageController@update']);
+    Route::put('/pages/publish', ['as' => 'page.publish', 'uses' => 'AdminPageController@publish']);
+    Route::put('/pages/unpublish', ['as' => 'page.unpublish', 'uses' => 'AdminPageController@unpublish']);
+    Route::delete('/pages/delete', ['as' => 'page.delete', 'uses' => 'AdminPageController@destroy']);
 
 });
 

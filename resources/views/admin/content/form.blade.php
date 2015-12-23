@@ -119,8 +119,16 @@
                     <?php $temp = '0'; ?>
                     <div class="form-group">
                         {!! Form::label('content', 'Contents') !!}
-                        {!! Form::text('content[key]['.$temp.']', old('content[key]['.$temp.']'), ['class' => 'form-control form-control-single', 'placeholder' => 'Content key']) !!}
-                        {!! Form::textarea('content[html]['.$temp.']', old('content[html]['.$temp.']'), ['class' => 'form-control editor', 'placeholder' => 'Type here ...', 'rows' => 15]) !!}
+                        <?php
+                            $value_key = old('content[key]['.$temp.']');
+                            $value_html = old('content[html]['.$temp.']');
+                            if(isset($contents['key'][$temp]) && !old('content[key]['.$temp.']')) {
+                                $value_key = $contents['key'][$temp];
+                                $value_html = $contents['html'][$temp];
+                            }
+                        ?>
+                        {!! Form::text('content[key]['.$temp.']', $value_key, ['class' => 'form-control form-control-single', 'placeholder' => 'Content key']) !!}
+                        {!! Form::textarea('content[html]['.$temp.']', $value_html, ['class' => 'form-control editor', 'placeholder' => 'Type here ...', 'rows' => 15]) !!}
                         <span class="help-block"><small>Your page content usually long description</small></span>
                     </div>
 
@@ -130,16 +138,27 @@
                             <label>Additional fields</label>
                             @for($i = 0; $i < count($additional_fields['field_type']); $i++)
                                 @for($j = 0; $j < $additional_fields['quantity'][$i]; $j++)
-                                    <?php $temp = $i.'_'.$j; ?>
-                                    {!! Form::text('content[key]['.$temp.']', old('content[key]['.$temp.']'), ['class' => 'form-control form-control-single', 'placeholder' => 'Content key']) !!}
-                                    @if($additional_fields['field_type'][$i] == 'text')
-                                        {!! Form::text('content[html]['.$temp.']', old('content[html]['.$temp.']'), ['class' => 'form-control form-control-single', 'placeholder' => 'Content details']) !!}
-                                    @elseif($additional_fields['field_type'][$i] == 'plaintextarea')
-                                        {!! Form::textarea('content[html]['.$temp.']', old('content[html]['.$temp.']'), ['class' => 'form-control form-control-single', 'placeholder' => 'Type here ...', 'rows' => 10]) !!}
-                                    @elseif($additional_fields['field_type'][$i] == 'richtexteditor')
-                                        {!! Form::textarea('content[html]['.$temp.']', old('content[html]['.$temp.']'), ['class' => 'form-control editor form-control-single', 'placeholder' => 'Type here ...', 'rows' => 15]) !!}
-                                    @endif
-                                    <hr>
+                                    <div class="additional-field">
+                                        <?php
+                                            $temp = $i.'_'.$j;
+
+                                            $value_key = old('content[key]['.$temp.']');
+                                            $value_html = old('content[html]['.$temp.']');
+                                            if(isset($contents['key'][$temp]) && !old('content[key]['.$temp.']')) {
+                                                $value_key = $contents['key'][$temp];
+                                                $value_html = $contents['html'][$temp];
+                                            }
+                                        ?>
+                                        {!! Form::text('content[key]['.$temp.']', $value_key, ['class' => 'form-control form-control-single', 'placeholder' => 'Content key']) !!}
+                                        @if($additional_fields['field_type'][$i] == 'text')
+                                            {!! Form::text('content[html]['.$temp.']', $value_html, ['class' => 'form-control form-control-single', 'placeholder' => 'Type here ...']) !!}
+                                        @elseif($additional_fields['field_type'][$i] == 'plaintextarea')
+                                            {!! Form::textarea('content[html]['.$temp.']', $value_html, ['class' => 'form-control form-control-single', 'placeholder' => 'Type here ...', 'rows' => 10]) !!}
+                                        @elseif($additional_fields['field_type'][$i] == 'richtexteditor')
+                                            {!! Form::textarea('content[html]['.$temp.']', $value_html, ['class' => 'form-control editor form-control-single', 'placeholder' => 'Type here ...', 'rows' => 15]) !!}
+                                        @endif
+                                        <hr>
+                                    </div>
                                 @endfor
                             @endfor
                         @endif

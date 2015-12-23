@@ -5894,6 +5894,9 @@ a, button {
   .settings-form-master-field:last-child {
     margin-bottom: 0; }
 
+.clear {
+  clear: both; }
+
 .block-header,
 .block-footer {
   background: #ebebeb;
