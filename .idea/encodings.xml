@@ -5,11 +5,14 @@
     <file url="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminContentController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminMenuController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminUserController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/PageController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Requests/Admin/CatFormRequest.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Requests/Admin/ContentFormRequest.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Requests/Admin/MenuFromRequest.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Requests/Admin/UpdateStateRequest.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Requests/Admin/UserFormRequest.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/breadcrumbs.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/routes.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Models/Admin/Cat.php" charset="UTF-8" />
@@ -22,6 +25,8 @@
     <file url="file://$PROJECT_DIR$/database/migrations/2015_12_17_180943_create_content_table.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/database/migrations/2015_12_18_051642_create_menu_table.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/database/migrations/2015_12_22_143517_add_content_types_to_content_table.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/migrations/2015_12_26_055803_add_order_no_to_menu_table.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/migrations/2015_12_26_074142_add_is_home_page_column_to_menu_table.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gulpfile.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/package.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/readme.md" charset="UTF-8" />
@@ -51,6 +56,7 @@
     <file url="file://$PROJECT_DIR$/resources/views/admin/shared/header.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/admin/shared/left.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/admin/shared/message.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/admin/user/form.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/auth/login.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/master.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/vendor/composer/autoload_classmap.php" charset="UTF-8" />

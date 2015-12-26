@@ -62,3 +62,10 @@ Breadcrumbs::register('admin.content.edit', function($breadcrumbs)
     $breadcrumbs->parent('admin.content');
     $breadcrumbs->push('Edit content', route('admin.content.edit'));
 });
+
+// admin user
+Breadcrumbs::register('admin.usersettings', function($breadcrumbs)
+{
+    $breadcrumbs->parent('admin.root');
+    $breadcrumbs->push('User settings', route('admin.usersettings'));
+});

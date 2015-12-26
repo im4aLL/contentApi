@@ -1,4 +1,4 @@
-@extends('master')
+@extends('admin.layout.master')
 @section('title', 'Create category')
 
 @section('content')

@@ -1,4 +1,4 @@
-@extends('master')
+@extends('admin.layout.master')
 @section('title', 'Manage menus')
 
 @section('content')
@@ -30,7 +30,7 @@
                         <td><input type="checkbox" name="select[]" value="{{ $menu->id }}"></td>
                         <td><a href="{{ route('admin.menu.edit', ['menu' => $menu->id]) }}">{{ $menu->name }}</a></td>
                         <td>{{ $menu->parent_id != 0 ? $menus->where('id', $menu->parent_id)->first()->name : '-' }}</td>
-                        <td>/{{ $menu->slug }}</td>
+                        <td>{{ ($menu->slug == '/') ? '/' : '/'. $menu->slug  }}</td>
                         <td class="text-center">
                             @if ($menu->updated_at == $menu->created_at)
                                 Never

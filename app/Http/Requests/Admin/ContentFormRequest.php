@@ -24,7 +24,7 @@ class ContentFormRequest extends Request
     public function rules()
     {
         return [
-            'key' => 'required',
+            'key' => 'required|unique:contents',
             'cat_id' => 'required',
             'title' => 'required',
             'content' => 'required|array',

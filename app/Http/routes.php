@@ -11,9 +11,17 @@
 |
 */
 
-Route::get('/', ['as' => 'home', function() {
-    return redirect('dashboard');
-}]);
+
+$menus = \App\Models\Admin\Menu::all();
+foreach($menus as $menu)
+{
+    if($menu->raw_path != NULL) {
+        Route::get($menu->slug, $menu->raw_path);
+    }
+    else {
+        Route::get($menu->slug, 'PageController@pages');
+    }
+}
 
 
 // admin routes
@@ -51,15 +59,9 @@ Route::group(['as' => 'admin.', 'middleware' => 'auth', 'namespace' => 'Admin', 
     Route::delete('/contents/delete', ['as' => 'content.delete', 'uses' => 'AdminContentController@destroy']);
     Route::post('/contents/settings', ['as' => 'content.settings', 'uses' => 'AdminContentController@settings']);
 
-    // pages
-    Route::get('/pages', ['as' => 'page', 'uses' => 'AdminPageController@index']);
-    Route::get('/pages/create', ['as' => 'page.create', 'uses' => 'AdminPageController@create']);
-    Route::post('/pages/create', ['as' => 'page.store', 'uses' => 'AdminPageController@store']);
-    Route::get('/pages/{page}/edit', ['as' => 'page.edit', 'uses' => 'AdminPageController@edit']);
-    Route::put('/pages/{page}/edit', ['as' => 'page.update', 'uses' => 'AdminPageController@update']);
-    Route::put('/pages/publish', ['as' => 'page.publish', 'uses' => 'AdminPageController@publish']);
-    Route::put('/pages/unpublish', ['as' => 'page.unpublish', 'uses' => 'AdminPageController@unpublish']);
-    Route::delete('/pages/delete', ['as' => 'page.delete', 'uses' => 'AdminPageController@destroy']);
+    // user
+    Route::get('/change-password', ['as' => 'usersettings', 'uses' => 'AdminUserController@manage']);
+    Route::put('/change-password', ['as' => 'usersettings.update', 'uses' => 'AdminUserController@update']);
 
 });
 

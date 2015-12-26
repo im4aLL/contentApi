@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\MenuFromRequest;
 use App\Http\Requests\Admin\UpdateStateRequest;
+use App\Models\Admin\Cat;
+use App\Models\Admin\Content;
 use App\Models\Admin\Menu;
 use Illuminate\Http\Request;
 
@@ -19,7 +21,7 @@ class AdminMenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::all();
+        $menus = Menu::orderBy('order')->get();
         return view('admin.menu.index', compact('menus'));
     }
 
@@ -31,8 +33,9 @@ class AdminMenuController extends Controller
     public function create()
     {
         $data = [];
-        // $data['menus'] = Menu::select('id', 'name')->lists('name', 'id')->toArray();
         $data['menus'] = Menu::findAllWithParent();
+        $data['contents'] = Content::select('id', 'title')->where('state', 1)->lists('title', 'id')->prepend('Select a content', '')->toArray();
+        $data['categories'] = Cat::select('id', 'name')->lists('name', 'id')->prepend('Select a category', '')->toArray();
 
         return view('admin.menu.form', $data);
     }
@@ -47,6 +50,9 @@ class AdminMenuController extends Controller
     {
         $data = $request->all();
         $data['slug'] = strlen($data['slug']) == 0 ? str_slug($data['name']) : $data['slug'];
+        if($data['is_homepage'] == 1) {
+            $data['slug'] = '/';
+        }
         $data['user_id'] = auth()->user()->id;
 
         $menu = Menu::create($data);
@@ -76,6 +82,9 @@ class AdminMenuController extends Controller
         $data = [];
         $data['menu'] = Menu::findOrFail($id);
         $data['menus'] = Menu::findAllWithParent();
+        $data['contents'] = Content::select('id', 'title')->where('state', 1)->lists('title', 'id')->prepend('Select a content', '')->toArray();
+        $data['categories'] = Cat::select('id', 'name')->lists('name', 'id')->prepend('Select a category', '')->toArray();
+
         return view('admin.menu.form', $data);
     }
 
@@ -90,6 +99,9 @@ class AdminMenuController extends Controller
     {
         $data = $request->all();
         $data['slug'] = strlen($data['slug']) == 0 ? str_slug($data['name']) : $data['slug'];
+        if($data['is_homepage'] == 1) {
+            $data['slug'] = '/';
+        }
 
         $menu = Menu::findOrFail($id);
         $menu->update($data);

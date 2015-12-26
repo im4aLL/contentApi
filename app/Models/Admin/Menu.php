@@ -8,6 +8,16 @@ class Menu extends Model
 {
     protected $guarded = ['id'];
 
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Admin\Cat', 'cat_id');
+    }
+
+    public function content()
+    {
+        return $this->belongsTo('App\Models\Admin\Content', 'content_id');
+    }
+
     /**
      * Get menu with parent menu names
      *

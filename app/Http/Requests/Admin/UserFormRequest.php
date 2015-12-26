@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use App\Http\Requests\Request;
 
-class MenuFromRequest extends Request
+class UserFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,9 @@ class MenuFromRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
-            'state' => 'required',
-            'content_id' => 'required_without_all:cat_id,raw_path',
-            'cat_id' => 'required_without_all:content_id,raw_path',
-            'raw_path' => 'required_without_all:content_id,cat_id'
+            'oldpassword' => 'required',
+            'password' => 'required|min:6',
+            'repassword' => 'required|same:password'
         ];
     }
 }
