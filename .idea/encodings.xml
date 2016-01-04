@@ -58,7 +58,6 @@
     <file url="file://$PROJECT_DIR$/resources/views/admin/shared/message.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/admin/user/form.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/auth/login.blade.php" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/resources/views/master.blade.php" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/vendor/composer/autoload_classmap.php" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

@@ -5841,6 +5841,15 @@ button.close {
 a, button {
   outline: none; }
 
+.container-left-col {
+  float: left;
+  width: 10%;
+  padding-right: 1%; }
+
+.container-right-col {
+  float: left;
+  width: 90%; }
+
 .login {
   padding: 100px 0; }
 

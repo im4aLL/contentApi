@@ -25,14 +25,12 @@
     <!-- body -->
     @if (Auth::check())
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-4 col-md-2 col-lg-1">@include('admin.shared.left')</div>
-                <div class="col-sm-8 col-md-10 col-lg-11">
-                    @include('admin.shared.breadcrumb')
-                    @include('admin.shared.error')
-                    @include('admin.shared.message')
-                    @yield('content')
-                </div>
+            <div class="container-left-col">@include('admin.shared.left')</div>
+            <div class="container-right-col">
+                @include('admin.shared.breadcrumb')
+                @include('admin.shared.error')
+                @include('admin.shared.message')
+                @yield('content')
             </div>
         </div>
     @else
