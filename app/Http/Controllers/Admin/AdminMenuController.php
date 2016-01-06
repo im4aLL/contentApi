@@ -50,9 +50,13 @@ class AdminMenuController extends Controller
     {
         $data = $request->all();
         $data['slug'] = strlen($data['slug']) == 0 ? str_slug($data['name']) : $data['slug'];
-        if($data['is_homepage'] == 1) {
+        if(isset($data['is_homepage']) && $data['is_homepage'] == 1) {
             $data['slug'] = '/';
         }
+        else {
+            $data['is_homepage'] = 0;
+        }
+
         $data['user_id'] = auth()->user()->id;
 
         $menu = Menu::create($data);

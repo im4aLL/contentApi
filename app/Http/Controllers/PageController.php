@@ -37,9 +37,9 @@ class PageController extends Controller
 
             $array = [];
             $counter = 0;
-            foreach($contents as $content) {
-                $array[$counter] = $content;
-                $array[$counter]['html'] = json_decode($content->content);
+            foreach($contents as $c) {
+                $array[$counter] = $c;
+                $array[$counter]['html'] = json_decode($c->content);
                 $counter++;
             }
 

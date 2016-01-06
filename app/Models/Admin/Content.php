@@ -100,16 +100,19 @@ class Content extends Model
         $array = self::getFirstContent($content->content);
         $additional_field_contents = self::getAdditionalContent($content->content);
 
-        $counter = 0;
-        for($i = 0; $i < count($additional_fields['field_type']); $i++)
+        if(count($additional_field_contents) > 0)
         {
-            for($j = 0; $j < $additional_fields['quantity'][$i]; $j++)
+            $counter = 0;
+            for($i = 0; $i < count($additional_fields['field_type']); $i++)
             {
-                $temp = $i.'_'.$j;
-                $array['key'][$temp] = $additional_field_contents['key'][$counter];
-                $array['html'][$temp] = $additional_field_contents['html'][$counter];
+                for($j = 0; $j < $additional_fields['quantity'][$i]; $j++)
+                {
+                    $temp = $i.'_'.$j;
+                    $array['key'][$temp] = $additional_field_contents['key'][$counter];
+                    $array['html'][$temp] = $additional_field_contents['html'][$counter];
 
-                $counter++;
+                    $counter++;
+                }
             }
         }
 

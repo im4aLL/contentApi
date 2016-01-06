@@ -13,16 +13,18 @@
 
 
 $menus = \App\Models\Admin\Menu::all();
-foreach($menus as $menu)
+if(count($menus) > 0)
 {
-    if($menu->raw_path != NULL) {
-        Route::get($menu->slug, $menu->raw_path);
-    }
-    else {
-        Route::get($menu->slug, 'PageController@pages');
+    foreach($menus as $menu)
+    {
+        if($menu->raw_path != NULL) {
+            Route::get($menu->slug, $menu->raw_path);
+        }
+        else {
+            Route::get($menu->slug, 'PageController@pages');
+        }
     }
 }
-
 
 // admin routes
 Route::group(['as' => 'admin.', 'middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'dashboard'], function () {
