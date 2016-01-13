@@ -2372,7 +2372,7 @@ if (typeof jQuery === 'undefined') {
         options = options || {};
         this.className = options.className || 'easyeditor';
 
-        // 'bold', 'italic', 'link', 'h2', 'h3', 'h4', 'alignleft', 'aligncenter', 'alignright', 'quote', 'code', 'list', 'x'
+        // 'bold', 'italic', 'link', 'h2', 'h3', 'h4', 'alignleft', 'aligncenter', 'alignright', 'quote', 'code', 'list', 'x', 'source'
         var defaultButtons = ['bold', 'italic', 'link', 'h2', 'h3', 'h4', 'alignleft', 'aligncenter', 'alignright'];
         this.buttons = options.buttons || defaultButtons;
         this.buttonsHtml = options.buttonsHtml || null;
@@ -2549,7 +2549,7 @@ if (typeof jQuery === 'undefined') {
                     event.preventDefault();
                 }
 
-                settings.clickHandler.call(this);
+                settings.clickHandler.call(this, this);
                 $(_this.elem).trigger('keyup');
             });
         }
@@ -3152,6 +3152,50 @@ if (typeof jQuery === 'undefined') {
             buttonHtml: 'List',
             clickHandler: function(){
                 _this.wrapSelectionWithList();
+            }
+        };
+
+        _this.injectButton(settings);
+    };
+
+    EasyEditor.prototype.source = function(){
+        var _this = this;
+        var settings = {
+            buttonIdentifier: 'source',
+            buttonHtml: 'Source',
+            clickHandler: function(thisButton){
+                var $elemContainer = $(thisButton).closest('.' + _this.className + '-wrapper');
+                var $elem = $elemContainer.find('.' + _this.className);
+                var $tempTextarea;
+
+                if($(thisButton).hasClass('is-view-source-mode')) {
+                    $tempTextarea = $('body > textarea.' + _this.className + '-temp');
+                    $elem.css('visibility', 'visible');
+                    $tempTextarea.remove();
+                    $(thisButton).removeClass('is-view-source-mode');
+                }
+                else {
+                    $('body').append('<textarea class="' + _this.className + '-temp" style="position: absolute; margin: 0;"></textarea>');
+                    $tempTextarea = $('body > textarea.' + _this.className + '-temp');
+
+                    $tempTextarea.css({
+                        'top' : $elem.offset().top,
+                        'left' : $elem.offset().left,
+                        'width' : $elem.outerWidth(),
+                        'height' : $elem.outerHeight()
+                    }).html( $elem.html() );
+
+                    if( $elem.css('border') !== undefined ) {
+                        $tempTextarea.css('border', $elem.css('border'));
+                    }
+
+                    $elem.css('visibility', 'hidden');
+                    $(thisButton).addClass('is-view-source-mode');
+
+                    $tempTextarea.on('keyup click change keypress', function() {
+                        $elem.html( $(this).val() );
+                    });
+                }
             }
         };
 
@@ -12553,7 +12597,7 @@ Utilities.prototype.loadRiceTextEditor = function () {
 
     if( $('.editor').length > 0 ) {
         $('.editor').easyEditor({
-            buttons: ['bold', 'italic', 'link', 'h2', 'h3', 'h4', 'alignleft', 'aligncenter', 'alignright', 'quote', 'code', 'list', 'x']
+            buttons: ['bold', 'italic', 'link', 'h2', 'h3', 'h4', 'alignleft', 'aligncenter', 'alignright', 'quote', 'code', 'list', 'x', 'source']
         });
     }
 };

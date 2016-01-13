@@ -90,7 +90,7 @@
         </div>
         <div class="block-body">
             <div class="row">
-                <div class="col-sm-12 col-lg-6">
+                <div class="col-sm-12 col-lg-7">
 
                     <div class="form-group">
                         {!! Form::label('key', 'Content API key') !!}

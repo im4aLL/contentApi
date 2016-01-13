@@ -13,7 +13,7 @@ Utilities.prototype.loadRiceTextEditor = function () {
 
     if( $('.editor').length > 0 ) {
         $('.editor').easyEditor({
-            buttons: ['bold', 'italic', 'link', 'h2', 'h3', 'h4', 'alignleft', 'aligncenter', 'alignright', 'quote', 'code', 'list', 'x']
+            buttons: ['bold', 'italic', 'link', 'h2', 'h3', 'h4', 'alignleft', 'aligncenter', 'alignright', 'quote', 'code', 'list', 'x', 'source']
         });
     }
 };
